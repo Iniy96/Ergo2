@@ -1,0 +1,150 @@
+.dosplanContainer{
+  padding-top: 90px;
+  background-color: white;
+}
+
+table, td, th {  
+  border: 0.5px solid black;
+  text-align: center;
+  background-color: none;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+td,th {
+  text-align: center;
+  background-color: none;
+}
+th, td {
+  padding: 5px;
+  background-color: none;
+}
+.container{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  background-color: none;
+}
+.left {
+  text-align: left;
+}
+
+.center {
+  text-align: center;
+}
+
+.right {
+  text-align: right;
+}
+
+.prepheading{
+  margin-left: 80px;
+
+}
+.reviewheading{
+margin-top:-40px ;
+margin-left: 590px;
+}
+
+.approvalheading{
+margin-top:-40px ;
+margin-left: 1270px;
+}
+
+.grpprep{
+display: flex;
+flex-direction: row;
+
+}
+.grpname{
+margin-left: 140px;
+margin-top:-40px ;
+
+}
+
+.grpreview{
+margin-top: -90px;
+margin-left: 590px;
+font-size: larger;
+}
+
+.grpreviewname{
+margin-top:-40px ;
+margin-left: 750px;
+font-size: larger;
+}
+
+.date{
+margin-top:30px ;
+margin-left: 0px;
+}
+.date1{
+  margin-top:49px ;
+  margin-left: 590px;
+  }
+
+.grpapprove{
+margin-left: 1160px;
+margin-top: -70px;
+font-size: larger;
+}
+.grpapprovename{
+margin-left: 1300px;
+margin-top: -30px;
+font-size: larger;
+}
+
+.date2{
+margin-top:50px ;
+margin-left: 1160px;
+}
+
+.prepsign{
+text-align: left;
+margin-top: 70px;
+}
+
+.reviewsign{
+margin-left: 580px;
+margin-top:-40px ;
+}
+
+.appovalsign{
+
+margin-left: 1160px;
+margin-top:-40px ;
+}
+
+.container{
+
+}
+
+.inputboxre{
+display: flex;
+margin-top:-40px ;
+margin-left: 760px;
+width: 190px;
+}
+
+.inputboxpr{
+display: flex;
+margin-top:-40px ;
+margin-left: 140px;
+width: 190px;
+height: -1px;
+}
+
+.inputboxap{
+display: flex;
+margin-top:-40px ;
+margin-left: 1290px;
+width: 190px;
+}
+
+
+.dosplanContainer th{
+  background-color: transparent;
+  color: black;
+} 

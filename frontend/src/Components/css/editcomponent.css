@@ -1,0 +1,16 @@
+.editrig{
+    position: absolute !important;
+    width: fit-content;
+    float: right;
+    right: 0;
+}
+
+.editRadioButtonRig{
+    transform: scale(0.8);
+}
+
+.editRadioButtonTools{
+    transform: scale(1.8);
+    float: left;
+    margin-left: 8px;
+}

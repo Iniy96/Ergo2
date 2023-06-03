@@ -1,0 +1,36 @@
+.workplancontainer{
+ box-sizing: border-box;
+  /* background-color: transparent; */
+ 
+   
+}
+
+
+
+.opennewtabbtn{
+    background-color: #E36662;
+    text-decoration: none;
+    font-weight: bold;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    padding-left: 2px;
+    padding-right: -6px;
+    margin-left: 520px;
+}
+
+.Downloadpdfbtn{
+    background-color: #E36662;
+    font-weight: bold;
+    color: black;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    margin-left: 120px;
+}
+
+.table-light{
+   
+}
+
+.table-skyblue{
+    background-color: skyblue;
+}

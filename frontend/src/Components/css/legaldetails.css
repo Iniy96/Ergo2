@@ -1,0 +1,38 @@
+.editbutton{
+    float:right;
+}
+.addnewbutton{
+    float: right;
+}
+
+.legal-heading{
+    text-align: left;
+    font-size: 20px;
+   /* padding-left: 5px;
+   padding-top: 4px; */
+   margin-top: -45px;
+}
+
+.tablecon{
+    margin-top: -24px;
+    
+}
+
+.legaldetailscontent{
+    margin-top: -240px;
+}
+
+.legalEditRadioBtnEnabbled{
+    
+}
+
+.legalpopup{
+    position: absolute !important;
+}
+
+.editRadioButton{
+    transform: scale(1.9);
+   float: left;
+   margin-left: 10px;
+}
+

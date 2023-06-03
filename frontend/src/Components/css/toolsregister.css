@@ -1,0 +1,115 @@
+.editbuttontools{
+   position: fixed;
+    float:right;
+    right: 98px;
+    margin-top: -45px;
+  
+}
+.addnewbuttontools{
+ position: fixed;
+ float: right;
+  right: 0;
+    margin-top: -45px;
+    
+    
+}
+
+.search-container-Box{
+    width: 1025px;
+    position:inherit !important;
+    margin-top: 250px !important;
+    margin-bottom: 40px ;
+    padding:20px;
+    padding-top: 100px;
+    /* margin:10px 0px; */
+    white-space: nowrap;
+    height: 25px;
+    font-size: 15px;
+}
+
+.tools-register-heading{
+  position: fixed;
+  font-size: large;
+  margin-top: -65px;
+  margin-left: -13px;
+}
+
+.toolsre{
+   margin-top: -220px;
+  
+}
+
+.table{
+
+  margin-top: 20px;
+}
+
+.toolssearchbox{
+  position: fixed !important;
+  width: 929px;
+  margin-top: -65px !important;
+ 
+}
+
+.search-container-Box input{
+ padding: 20px;
+}
+
+
+
+.toolspopup{
+position: absolute !important;
+}
+
+.editComponent{
+  position: absolute !important;
+  background-color: transparent !important;
+}
+
+.ergonlogo{
+  position: fixed;
+}
+
+nav::after{
+  position: fixed;
+  margin-top: 50px;
+  margin-left: 52px;
+}
+
+.jupitertext{
+ position: fixed;
+ margin-left: 0;
+}
+
+nav ul.horizontal-list{
+  position: fixed;
+  margin-left: 19px;
+  z-index: 1;
+}
+
+
+.table-container {
+  max-height: 590px !important;
+  overflow: auto !important;
+}
+
+.table-container table {
+  width: 100% !important;
+  border-collapse: collapse !important; 
+}
+
+.table-container thead th {
+  background-color:  #4CAF50 !important;
+  font-weight: bold !important;
+
+}
+
+.table-container tbody td {
+  white-space: nowrap !important;
+  overflow:auto !important;
+  text-overflow: ellipsis !important;
+}
+
+/* body {
+  overflow: hidden !important;
+} */
