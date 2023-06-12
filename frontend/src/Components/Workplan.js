@@ -74,7 +74,7 @@ function Workplan() {
     <div className='workplancontainer'>
       <div className="col col-lg-6 mx-auto d-flex justify-content-center" style={{ marginTop: '33px' }}>
         <form id="workplan">
-          <table className="table table-responsive table-bordered mx-auto">
+          <table className="table table-responsive table-bordered mx-auto m-0">
             <thead>
               <tr>
                 <th className="text-center table-light" colSpan="2">Work Plan</th>
@@ -165,40 +165,26 @@ function Workplan() {
 		client on completion of the task.<br/>
 		5. In case of any variation in the Scope of Work defined above, please inform the central team.</td>
 				</tr>
-      
-              <div className='table-light'>
+        </tbody>
+          </table>
+              <div className='bg-white'>
               
-                  <div className='table-light'>
-                    <h6 className="table-light" >Prepared By</h6>
-                    <h6 className="table-light" style={{ textAlign: 'center' }} >Signed By</h6>
+                  <div >
+                    <h6  >Prepared By</h6>
+                    <h6  >Signed By</h6>
                   </div>
-                  <div className='table-light'>
-                    <h6 className="table-light" >Shubham Mehta</h6>
+                  <div >
+                    <h6  >Shubham Mehta</h6>
                     <h6></h6>
                   </div>
-                  <div className='table-light'>
-                    <div className="table-light" >TSD-OPS-FOR-009-19, Rev.01</div>
-                    <div className="table-light" >30 April 2022</div>
-
+                  <div>
+                    <div  >TSD-OPS-FOR-009-19, Rev.01</div>
+                    <div >30 April 2022</div>
                   </div>
-                  <div className="table-light" >6</div>
-              
-               
+                  <div >6</div>
               </div>
-              <div className="table-light"></div>
-              <div className="table-light"></div>
-              <div className="table-light"></div>
-              <div className="table-light"></div>
-
-            </tbody>
-       
-          </table>
-          
-       
         </form>
-      </div>
-     
-      
+      </div> 
       <a class="opennewtabbtn" href="/workplan" target="_blank" title="Open in New Tab" >Open in New Tab<img src="https://seekicon.com/free-icon-download/box-arrow-up-right_1.svg" height="15" width="49"/> </a>
               
               <button  type="submit" class="Downloadpdfbtn" onClick={handleSubmit} style={{bgcolor: '#E36662'}}>Download Pdf</button>

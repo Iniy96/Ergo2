@@ -16,17 +16,17 @@ function Navbar({isLoggedIn,setIsLoggedIn}) {
   return (
 
 
-    <nav className="navbar navbar-expand-lg bg-white position-fixed top-0 w-100 px-4 border pb-0">
+    <nav className="navbar navbar-expand-lg bg-white position-fixed top-0 w-100 px-4 pb-0 " style={{zIndex:99}}>
       <div class="container-fluid">
-        <div class="navbar-brand bg-white" >
-          <img src={Etlogo} height="30px" width="30px" />
-          <div > Jupiter</div>
+        <div class="navbar-brand bg-white d-flex justify-content-center align-items-center flex-column" >
+          <img src={Etlogo} height="49px" width="59px" />
+          <div> Jupiter</div>
         </div>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav justify-content-between w-100 ps-3 mb-2 mb-lg-0" >
+        <div class="collapse navbar-collapse " id="navbarSupportedContent">
+          <ul class="navbar-nav justify-content-between w-100 ps-3 mb-2 mb-lg-0 border-bottom" >
             <li class="nav-item"><Link to="/dashboard" class="nav-link">Dashboard</Link></li>
             <li class="nav-item"><Link to="/dailytracker" class="nav-link">Daily Tracker</Link></li>
             <li class="nav-item"><Link to="/surveyschedule" class="nav-link">Survey Schedule</Link></li>

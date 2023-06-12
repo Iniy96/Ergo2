@@ -21,12 +21,12 @@ th, td {
   padding: 5px;
   background-color: none;
 }
-.container{
+/* .container{
   display: flex;
   justify-content: space-between;
   margin-top: 20px;
   background-color: none;
-}
+} */
 .left {
   text-align: left;
 }

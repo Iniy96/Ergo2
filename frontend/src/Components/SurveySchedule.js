@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import "../Components/css/surveyschedule.css";
+import { NavbarCompensator } from "./NavbarCompensator";
+import { TitileAndSearch } from "./TitileAndSearch";
 
 const SurveySchedule = () => {
   const [searchText, setSearchText] = useState("");
@@ -7,7 +9,7 @@ const SurveySchedule = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [showLegend, setShowLegend] = useState(false);
   const [scheduleData, setScheduleData] = useState([
-    
+
     {
       rigName: "Trident 16 (T16)",
       location: "Oman",
@@ -116,21 +118,20 @@ const SurveySchedule = () => {
     ));
   };
 
-  return (
-    
-   <div>
-      <h1 className="survey-schedule-heading">Survey Schedule</h1>
-      <div className="search-container">
-        <input
-          type="text"
-          placeholder="Search..."
-          value={searchTerm}
-          onChange={handleSearchChange}
-          className="search-box"
-        />
-      </div>
-   </div>
-    );
-    }
+  //data sent to TitleAndSearch component as prop 
+  const titleAndSearchProp ={
+    title:"Survey Schedule",
+    searchTerm:searchText,
+    handleSearchChange:handleSearchChange,
+    placeholder: "Search... "
+  }
 
-    export default SurveySchedule;
+  return (
+
+    <div>
+       <TitileAndSearch  data={titleAndSearchProp} />
+    </div>
+  );
+}
+
+export default SurveySchedule;

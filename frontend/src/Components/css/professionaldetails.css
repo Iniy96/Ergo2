@@ -14,7 +14,7 @@ table {
   }
   
   .professionaltableth {
-    background-color: #4CAF50;
+    background-color: rgb(25,135,84);
     color: white;
   }
   
@@ -22,43 +22,23 @@ table {
     background-color: #f2f2f2;
   }
   
-  button {
+  /* button {
     margin: 8px;
     padding: 8px;
     background-color: #4CAF50;
     color: white;
     border: none;
     border-radius: 4px;
-  }
+  } */
   
-  button:hover {
+  /* button:hover {
     background-color: #3e8e41;
-  }
+  } */
  /* search box */
  .search-container {
   text-align: center;
 }
 
-.search-box {
-  /*width: 300px;
-  padding: 10px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-  font-size: 16px;
-  margin-bottom: 5px;
-  margin-top: 2px;*/
-  /* box-sizing: border-box; */
-
-/* position: absolute; */
-width: 600px;
-height: 40px;
-left: 400px;
-top: 80px;
-margin-top: 13px;
-/* background: #FFFFFF; */
-border: 1px solid black;
-padding-left: 10px;
-}
 
   .editbutton{
     float: right;
@@ -75,8 +55,26 @@ padding-left: 10px;
 
   .professionalpopup{
     position: absolute !important;
+    z-index: 1001;
+    top: 0;
   }
+  .popup::-webkit-scrollbar{
+    display: none;
+  }
+  
 
   .editRadioButtonProfessional{
     transform:scale(0.9);
   }
+
+  .professionaltable-container{
+    overflow: auto;
+    max-height: 600px; /* Set a max height to enable scrolling */
+  }
+
+  .professionaltable-container thead {
+    position: sticky;
+    top: 0;
+    background-color: #f5f5f5;
+  }
+  

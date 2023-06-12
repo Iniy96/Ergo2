@@ -25,14 +25,14 @@
   margin: 0 auto;
 }
 
-label {
+.loginWrapper label {
   display: block;
   padding: 15px 0;
   font-size: 20px;
   font-weight: 700;
 }
 
-input {
+.loginWrapper input {
   border: 1px solid #333;
   height: 45px;
   width: 100%;

@@ -1,7 +1,8 @@
 .survey-schedule-heading{
-    text-align: left;
+   /*  text-align: left;
     font-size: 20px;
-    margin-top: 80px;
+    margin-top: 80px; */
+    display: inline-block;
 }
 table {
     border-collapse: collapse;
@@ -14,7 +15,7 @@ table {
   }
   
   .surveyscheduletableth {
-    background-color: #4CAF50;
+    background-color: rgb(25,135,84);
     color: white;
   }
   
@@ -22,7 +23,7 @@ table {
     background-color: #f2f2f2;
   }
   
-  button {
+ /*  button {
     margin: 8px;
     padding: 8px;
     background-color: #4CAF50;
@@ -33,10 +34,12 @@ table {
   
   button:hover {
     background-color: #3e8e41;
-  }
+  } */
  /* search box */
  .search-container {
   text-align: center;
+  /* padding-left: 10rem; */
+  display: inline-block;
 }
 
 .search-box {
@@ -49,12 +52,13 @@ table {
   margin-top: 2px;*/
   box-sizing: border-box;
 
-position: absolute;
-width: 400px;
+/* position: fixed; */
+width: 600px;
 height: 40px;
-left: 300px;
-top: 77px;
 
+/* left: 300px;
+top: 77px;
+ */
 background: #FFFFFF;
 border: 3px solid black;
 }

@@ -4,7 +4,6 @@
     font-size: 19px;
    padding-left: 18px;
    padding-top: 54px;
-   margin-top: -160px;
 }
 table {
     border-collapse: collapse;
@@ -21,7 +20,7 @@ th, td {
   
   
 th {
-    background-color: #4CAF50;
+    background-color: rgb(25,135,84);
     color: white;
   }
   
@@ -29,15 +28,15 @@ th {
     background-color: #f2f2f2;
   }
   
-  button {
+/*   button {
     margin: 8px;
     padding: 8px;
     /* background-color: #4CAF50; */
-    color: white;
+   /*  color: white;
     border: none;
     border-radius: 4px;
   }
-  
+   */ 
   /* button:hover {
     background-color: #3e8e41;
   } */
@@ -197,14 +196,12 @@ th {
 }
 
 .EditRadioBtnEnabbled{
-  display: flex;
+  /* display: flex; */
   align-items: center;
   gap: 7px;
   justify-content: center;
-  padding-bottom: 18px;
-  border-color: black; 
+  padding-bottom: 18px; 
 
-  border: '0.5px thin #000',
 
 }
 
@@ -226,13 +223,13 @@ font-size: 15px;
 .Searchbar input{
   padding: 10px;
 }
-.btn-group{
+/* .btn-group{
   width: 100%;
   display: flex;
   justify-content: space-between;
   float: right;
   
-}
+} */
 /* .rig{
   background-color: gray;
 } */
@@ -262,18 +259,17 @@ font-size: 15px;
 
 }
 
-.rigtablecontainer{
+/* .rigtablecontainer{
   max-height: 590px !important;
-  overflow: auto !important;
-}
+} */
 
-.rigtablerigtablecontainer{
+/* .rigtablerigtablecontainer{
   width: 100% !important;
   border-collapse: collapse !important;
-}
+} */
 
 .rigtable thead th{
-  background-color:  #4CAF50 !important;
+  background-color:  #198754 !important;
   font-weight: bold !important;
 }
 
@@ -281,4 +277,23 @@ font-size: 15px;
   white-space: nowrap !important;
   overflow: hidden !important;
   text-overflow: ellipsis !important;
+}
+.rigtable-table-fix-container{
+  overflow: auto;
+  max-height: 430px; /* Set a max height to enable scrolling */
+}
+
+.rigtable-table-fix-container thead {
+  position: sticky;
+  top: 0;
+}
+
+.ToggleBtnGroupColor{
+  border: none;
+  padding: 0.5rem 1rem ;
+  border: 1px solid gray;
+}
+
+.ToggleBtnGroupColorRed{
+  background-color: #E36662;
 }

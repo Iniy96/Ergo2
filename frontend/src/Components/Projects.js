@@ -5,6 +5,9 @@ import CreateProject from '../Components/Createproject';
 import TeamSelection from "./teamselection";
 import axios from 'axios';
 import {Link} from "react-router-dom";
+import { NavbarCompensator } from './NavbarCompensator';
+import { TitileAndSearch } from './TitileAndSearch';
+import { TitleAndSearchCompensator } from './TitleAndSearchCompensator';
 
 
 function ProjectDetails() {
@@ -266,12 +269,24 @@ function ProjectDetails() {
     }
   }, [])
 
-  useEffect(() => {
+  /*  useEffect(() => {
     fetch('http://localhost:8002/supervisor_customer_names')
       .then(res => res.json())
       .then(data => setSupervisorNames(data))
       .catch(err => console.log(err));
-  }, []);
+  }, []);  */
+   useEffect(() => {
+    fetch('http://localhost:8002/professional_details')
+      .then(res => res.json())
+      .then(data =>{
+        const FilteredSupervisor = data.filter((item)=>{
+          if(item.Designation === "Supervisior") return item.Customer_Name
+        }).map((item)=> item.Customer_Name)
+        console.log("filtersupersior",FilteredSupervisor);
+        setSupervisorNames(FilteredSupervisor)
+      })
+      .catch(err => console.log(err));
+  }, []); 
 
   useEffect(() => {
     fetch('http://localhost:8002/technician_customer_names')
@@ -450,9 +465,11 @@ function ProjectDetails() {
     await CreateProject([formdata1, supervisorNames, technicianNames, formdata3Tool1, formdata3Tool2])
   }
 
+  
 
   return (
     <>
+    
     <div className="project-details-container">
       <h4>Projects</h4>
       <div className='section-step'>
@@ -591,6 +608,7 @@ function ProjectDetails() {
               <div className='left'>
                 {
                   addSupervisor.map((el, index) => {
+                    console.log(el);
                     return (
                       <div className='form-element'>
                         <label>*Supervisor {index + 1} :</label>

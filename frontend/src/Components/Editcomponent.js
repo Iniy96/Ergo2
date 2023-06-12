@@ -15,61 +15,68 @@ const Editcomponent = ({
   hull_no,
   design_2,
   new_group,
+  handleEdit
 }) => {
-    const [checked,setChecked] = useState(false)
-   
-    const [formData, setFormData] = useState({
-      s_no:s_no,
-      rig_name: rig_name,
-      short_name: short_name,
-      customer_name: customer_name,
-      details: details,
-      design: design,
-      location:location,
-      hull_no: hull_no,
-      design_2: design_2,
-      new_group:new_group
-    });
-    const handleInputChange = (event) => {
-      const { name, value } = event.target;
-      setFormData((prevState) => ({
-        ...prevState,
-        [name]: value,
-      }));
-    };
+  const [checked, setChecked] = useState(false)
 
-    const handleStopClose = (e)=>{
-      e.stopPropagation()
-    }
+  const [formData, setFormData] = useState({
+    s_no: s_no,
+    rig_name: rig_name,
+    short_name: short_name,
+    customer_name: customer_name,
+    details: details,
+    design: design,
+    location: location,
+    hull_no: hull_no,
+    design_2: design_2,
+    new_group: new_group
+  });
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setFormData((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
 
-  
-    const handleSubmit = async(e)=>{
-        e.preventDefault()
-        const res = await axios.put("http://localhost:8002/post/"+formData.s_no,formData)
-        const data = await res.json()
-        console.log(data)
-    }
+  const handleStopClose = (e) => {
+    e.stopPropagation()
+  }
+
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    const res = await axios.put("http://localhost:8002/post/" + formData.s_no, formData)
+    //const data = await res.json()
+    //console.log(data)
+  }
+
+  const handleCancel = ()=>{
+    setChecked(false) 
+    handleEdit()
+  }
 
   return (
-    <div>
-        <div className='editRadioButtonRig'>
-                <input
-                    type="radio"
-                    name="rig"
-                    // checked={selectedRigId === rig.id}
-                    onClick={()=>setChecked(true)}
-                    />
-        </div>
-        {
-            checked &&
-            <>
-                <div className='popup-container editComponent editrig'  onClick={(e)=>{
-                  e.stopPropagation()
-                  setChecked(false)
-                }}>
-          <div className="popup editrig" onClick={handleStopClose}>
-          <form onSubmit={handleSubmit}>
-          {/* <label>
+    <>
+      <div className='editRadioButtonRig d-inline'>
+        <input
+          type="radio"
+          name="rig"
+          // checked={selectedRigId === rig.id}
+          onClick={() => setChecked(true)}
+        />
+      </div>
+      {
+        checked &&
+        <>
+          <div className='popup-container professionalpopup editrig' onClick={(e) => {
+            e.stopPropagation()
+            setChecked(false)
+            handleEdit()
+          }}>
+            <div className="popup editrig pt-5" onClick={handleStopClose}>
+              <form onSubmit={handleSubmit}>
+                {/* <label>
               S.NO
               <input
                 type="text"
@@ -78,100 +85,101 @@ const Editcomponent = ({
                 onChange={handleInputChange}
               />
             </label> */}
-            <label>
-              Rig Name:
-              <input
-                type="text"
-                name="rig_name"
-                value={formData.rig_name}
-                onChange={handleInputChange}
-              />
-            </label>
-            <label>
-              Short Name:
-              <input
-                type="text"
-                name="short_name"
-                value={formData.short_name}
-                onChange={handleInputChange}
-              />
-            </label>
-            <label>
-              Customer Name:
-              <input
-                type="text"
-                name="customer_name"
-                value={formData.customer_name}
-                onChange={handleInputChange}
-              />
-            </label>
-            <label>
-            Details:<br/>(Upload Document)
-              {/* <input
+                <label>
+                  Rig Name:
+                  <input
+                    type="text"
+                    name="rig_name"
+                    value={formData.rig_name}
+                    onChange={handleInputChange}
+                  />
+                </label>
+                <label>
+                  Short Name:
+                  <input
+                    type="text"
+                    name="short_name"
+                    value={formData.short_name}
+                    onChange={handleInputChange}
+                  />
+                </label>
+                <label>
+                  Customer Name:
+                  <input
+                    type="text"
+                    name="customer_name"
+                    value={formData.customer_name}
+                    onChange={handleInputChange}
+                  />
+                </label>
+                <label>
+                  Details:<br />(Upload Document)
+                  {/* <input
                 type="text"
                 name="details"
                 value={formData.details}
                 onChange={handleInputChange}
               /> */}
-              <UploadDocument handleFileUpload={(file) => setFormData({ ...formData, details: file })} />
-            </label>
-            <label>
-             Design
-             
-              <input
-                type="text"
-                name="design"
-                value={formData.design}
-                onChange={handleInputChange}
-              />
-            </label>
-            <label>
-              Location:
-              <input
-                type="text"
-                name="location"
-                value={formData.location}
-                onChange={handleInputChange}
-              />
-            </label>
-            <label>
-              Hull Number:
-              <input
-                type="text"
-                name="hull_no"
-                value={formData.hull_no}
-                onChange={handleInputChange}
-              />
-            </label>
-            <label>
-              Design 2:
-              <input
-                type="text"
-                name="design_2"
-                value={formData.design_2}
-                onChange={handleInputChange}
-              />
-            </label>
-            <label>
-              New Group:
-              <input
-                type="text"
-                name="new_group"
-                value={formData.new_group}
-                onChange={handleInputChange}
-              />
-            </label>
-            <br />
-            <button type="submit">Submit</button>
-            <button onClick={() => setChecked(false)}>Cancel</button>
-          </form>
+                  <UploadDocument handleFileUpload={(file) => setFormData({ ...formData, details: file })} />
+                </label>
+                <label>
+                  Design
+
+                  <input
+                    type="text"
+                    name="design"
+                    value={formData.design}
+                    onChange={handleInputChange}
+                  />
+                </label>
+                <label>
+                  Location:
+                  <input
+                    type="text"
+                    name="location"
+                    value={formData.location}
+                    onChange={handleInputChange}
+                  />
+                </label>
+                <label>
+                  Hull Number:
+                  <input
+                    type="text"
+                    name="hull_no"
+                    value={formData.hull_no}
+                    onChange={handleInputChange}
+                  />
+                </label>
+                <label>
+                  Design 2:
+                  <input
+                    type="text"
+                    name="design_2"
+                    value={formData.design_2}
+                    onChange={handleInputChange}
+                  />
+                </label>
+                <label>
+                  New Group:
+                  <input
+                    type="text"
+                    name="new_group"
+                    value={formData.new_group}
+                    onChange={handleInputChange}
+                  />
+                </label>
+                <div className='d-flex justify-content-evenly mt-5'>
+                  <button type="submit" className='btn btn-success'>Submit</button>
+                  <button onClick={handleCancel } className='btn btn-danger'>Cancel</button>
+                </div>
+              </form>
+            </div>
           </div>
-        </div>
-            </>
-        }
-    
-        
-    </div>
+        </>
+      }
+
+
+    </>
   )
 }
 

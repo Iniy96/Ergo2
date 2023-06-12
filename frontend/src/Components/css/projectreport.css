@@ -61,7 +61,7 @@ body {
   background: #fff;
 }
 
-.container {
+/* .container {
   display: flex;
   flex-direction: column;
   position: relative;
@@ -71,7 +71,7 @@ body {
   margin: 100px auto 0;
   word-break: break-all;
   border: 1px solid rgba(0, 0, 0, 0.274);
-}
+} */
 
 .bloc-tabs {
   display: flex;
@@ -110,11 +110,11 @@ body {
 }
 
 
-
+/* 
 button {
   border: none;
   
-}
+} */
 .content-tabs {
   flex-grow : 1;
 }
@@ -165,8 +165,6 @@ button {
 
  .popup-container {
  margin-left: 0px;
- position: relative;
- 
 }
 
 .popup-content{

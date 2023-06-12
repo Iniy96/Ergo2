@@ -10,22 +10,32 @@ import { Link } from 'react-router-dom';
 import UploadDocument from './Uploaddocument';
 import CombinedRigDetails from "../Components/CombinedRigDetails.pdf"
 import { Document, Page } from '@react-pdf/renderer';
+import { NavbarCompensator } from './NavbarCompensator';
+import { TitileAndSearch } from './TitileAndSearch';
+import { TitleAndSearchCompensator } from './TitleAndSearchCompensator';
+import Showmap from './Showmap';
+import { ShowHandbook } from './ShowHandbook';
+import convertToBase64 from '../helpers/ConvertToBase64';
 
 const Rigdetails = () => {
+  //handling button group (List, Map,Handbook) buton states
+  const [showListView, setshowListView] = useState(true)
+  const [showMapView, setshowMapView] = useState(false);
+  const [showHandbookView, setshowHandbookView] = useState(false);
+
+  const [ToggleBtnGroupColorRed, setToggleBtnGroupColorRed] = useState("List")
+  //******************************************************** */
   const [showImage, setShowImage] = useState(false);
-  const [showHandBook, setShowHandBook] = useState(false);
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState(""); //stores and updates the value of search filter form the TitleAndSearch Component
   const [searchResults, setSearchResults] = useState([]);
   const [selectedRig, setSelectedRig] = useState(null);
-  const [showHandbook, setShowHandbook] = useState(false);
-  
-  
-  const [showMapView, setShowMapView] = useState(false);
-   const [selectedRigId, setSelectedRigId] = useState(null);
-  const [showForm, setShowForm] = useState(false);
+  const [selectedRigId, setSelectedRigId] = useState(null);
+  const [showForm, setShowForm] = useState(false); //handling popup
+  //edition functionality
+  const [enableEdit, setEnableEdit] = useState(false)
   // const [formData, setFormData] = useState()
   const [formData, setFormData] = useState({
-    s_no:"",
+    s_no: "",
     rig_name: "",
     short_name: "",
     customer_name: "",
@@ -36,9 +46,6 @@ const Rigdetails = () => {
     design_2: "",
     new_group: ""
   });
-  const handleClick = () => {
-    setShowImage(true);
-  };
 
   //adding button functionality
   const handleInputChange = (event) => {
@@ -49,40 +56,35 @@ const Rigdetails = () => {
       s_no: formData.length + 1,
     }));
   };
-  
-
-  const handleEditClick = (rig) => {
-    setSelectedRig(rig);
-    setShowForm(true);
-  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    fetch('http://localhost:8002/post', {
+    console.log(formData);
+    /* fetch('http://localhost:8002/post', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(formData)
     })
-    .then(response => response.json())
-    .then(data => {
-      setShowForm(false)
-      console.log(data);
-      setFormData({
-        s_no:'',
-        rig_name: '',
-        short_name: '',
-        customer_name: '',
-        details: '',
-        design: '',
-        location: '',
-        hull_no: '',
-        design_2: '',
-        new_group: ''
-      });
-    })
-    .catch(error => console.log(error));
+      .then(response => response.json())
+      .then(data => {
+        setShowForm(false)
+        console.log(data);
+        setFormData({
+          s_no: '',
+          rig_name: '',
+          short_name: '',
+          customer_name: '',
+          details: '',
+          design: '',
+          location: '',
+          hull_no: '',
+          design_2: '',
+          new_group: ''
+        });
+      })
+      .catch(error => console.log(error)); */
   };
 
   useEffect(() => {
@@ -97,128 +99,93 @@ const Rigdetails = () => {
     fetchRigDetails();
   }, []);
 
+  const handleStopClose = (e) => {
+    e.stopPropagation()
+  }
 
 
-  const handleListClick = () => {
-    // Render a list view of the rigs
-  };
 
-  const handleMapViewClick = () => {
-    // Render a map view of the rigs
-    setShowMapView(!showMapView);
-  };
 
-  const handleHandbookClick = () => {
-    // Render a handbook of the 
-    setShowHandBook(true);
-  };
-
-  const handleDetailsClick = (rig) => {
-    console.log(rig);
-  };
-
+  //Buton Functions for TitleAndSearch component
+  const handleEdit = () => {
+    setEnableEdit(pre => !pre)
+  }
+  const handleAddNew = () => {
+    setShowForm(pre => !pre)
+  }
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
   };
-const MapWithImage = ()=>{
-
-}
-
-  const handleStopClose = (e)=>{
-    e.stopPropagation()
+  //data sent to TitleAndSearch component as prop 
+  const titleAndSearchProp = {
+    title: "Rig Details",
+    searchTerm: searchTerm,
+    handleSearchChange: handleSearchChange,
+    placeholder: "Search by Location and Rig short name ",
+    addEditBtn: {
+      AddBtn: handleAddNew,
+      EditBtn: handleEdit
+    }
   }
-  
-  const handleCloseHandbook = () => {
-    setShowHandbook(false);
-  };
 
-  //edition functionality
-  const [enableEdit,setEnableEdit] = useState(false)
+
+  //******************handle List,Map ,Handbook views */
+ 
+  const handleListViewBtn = () => {
+    setshowListView(true)
+    setshowMapView(false)
+    setshowHandbookView(false)
+    setToggleBtnGroupColorRed("List")
+  }
+  const handleMapViewBtn = () => {
+    setshowListView(false)
+    setshowMapView(true)
+    setshowHandbookView(false)
+    setToggleBtnGroupColorRed("Map")
+  }
+  const handleHandBookViewBtn = () => {
+    setshowListView(false)
+    setshowMapView(false)
+    setshowHandbookView(true)
+    setToggleBtnGroupColorRed("HandBook")
+  }
+
+  const handleFileUpload = async (e) => {
+    const base64 = await convertToBase64(e.target.files[0]);
+    setFormData((prevState) => ({
+      ...prevState,
+      details: e.target.files[0],
+      s_no: formData.length + 1,
+    }));
+  }
+
   return (
-   
 
-    <div className='rig'>
-       {showMapView && <MapWithImage />}
-        
-        <div className="search-container-Box">
-        <h1 className="rig-details-heading">Rig Details</h1>
-        <div className="Searchbar">
-        {/* <input
-          type="text"
-          placeholder="Search by rigname or location"
-          value={searchTerm}
-          onChange={handleSearchChange}
-          className="search-box"
-        /> */}
-         <input
-        type="text"
-        placeholder="Search by rig name or location"
-        onChange={(event) => {
-          setSearchTerm(event.target.value);
-        }}
-      />
-         {/* {searchResults
-        .filter(
-          (result) =>
-            result.rig_name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-            result.location.toLowerCase().includes(searchTerm.toLowerCase())
-        )
-        .map((rig, index) => (
-          <div key={index} className="rig-card">
-            <div className="rig-image">
-              <Slider />
-            </div>
-            <div className="rig-content">
-              <h2>{rig.rig_name}</h2>
-              <p>{rig.details}</p>
-              <button onClick={() => handleEditClick(rig)}>Edit</button>
-            </div>
-          </div>
-        ))}
-      {showForm && <Editcomponent rig={selectedRig} setShowForm={setShowForm} />} */}
-         
-  </div>
+    <>
+      <TitileAndSearch data={titleAndSearchProp} />
+      <TitleAndSearchCompensator />
 
-         
-          
+      <div className='bg-white position-fixed pb-1 pt-1 ps-3 w-100' >
+        <div class="btn-group" role="group">
+          <button type="button" class={`ToggleBtnGroupColor ${ToggleBtnGroupColorRed ==="List"?"ToggleBtnGroupColorRed":""}`} onClick={handleListViewBtn}>List</button>
+          <button type="button" class={`ToggleBtnGroupColor ${ToggleBtnGroupColorRed ==="Map"?"ToggleBtnGroupColorRed":""}`} onClick={handleMapViewBtn}>Map</button>
+          <button type="button" class={`ToggleBtnGroupColor ${ToggleBtnGroupColorRed ==="HandBook"?"ToggleBtnGroupColorRed":""}`}  onClick={handleHandBookViewBtn}>Handbook</button>
         </div>
-        <div className='btn-Container'>
-          <div className='listmaphandbook_btn'>
-            <button className="listbutton active" onClick={handleListClick} style={{marginLeft:'5px'}}>List</button>
-        <Link to="/showmap">< button className="mapbutton" onClick={handleClick}> Map </button></Link>
-         <Link to="/handbook" >   <button className="handbookbutton"  onClick={handleHandbookClick} >Handbook</button></Link>
-         {showHandbook && (
-        <div className="pdf-container">
-          <div className="pdf-close-button" onClick={handleCloseHandbook}>
-            Close
-          </div>
-          <Document file={"../Components/CombinedRigDetails.pdf"} onLoadSuccess={() => console.log('Document loaded successfully.')}>
-            <Page pageNumber={1} />
-          </Document>
-        </div>
-      )}
-          </div>
-          <div btn-group>
-            <button className='addnewbuttonrig' onClick={() => setShowForm(true)}>Add New</button>
-            <button className="editbuttonrig"onClick={()=>setEnableEdit(preve => !preve)}>Edit</button>
-          </div>
-        </div>
-        {/* <div class="btn-group" role="group" aria-label="Basic example">
-  <button type="button" class="btn btn-secondary">List</button>
-  <button type="button" class="btn btn-secondary">Map</button>
-  <button type="button" class="btn btn-secondary">Handbook</button>
-</div> */}
-    <div>
-      {/**new add */}
-      {showForm && (
-        <div className='popup-container rigpopup'   onClick={(e)=>{
-          e.stopPropagation()
-          setShowForm(false)
-        }}>
+      </div>
 
-          <div className="popup" onClick={handleStopClose}>
-          <form onSubmit={handleSubmit}>
-          {/* <label>
+
+      <div style={{ height: "3rem" }}></div>
+      <div>
+        {/**new add */}
+        {showForm && (
+          <div className='popup-container professionalpopup rigpopup' onClick={(e) => {
+            e.stopPropagation()
+            setShowForm(false)
+          }} style={{ zIndex: 1000 }}>
+
+            <div className="popup  pt-5 " onClick={handleStopClose}>
+              <form onSubmit={handleSubmit}>
+                {/* <label>
               S.NO
               <input
                 type="text"
@@ -227,116 +194,127 @@ const MapWithImage = ()=>{
                 onChange={handleInputChange}
               />
             </label> */}
-            <label>
-              Rig Name:
-              <input
-                type="text"
-                name="rig_name"
-                value={formData.rig_name}
-                onChange={handleInputChange}
-              />
-            </label>
-            <label>
-              Short Name:
-              <input
-                type="text"
-                name="short_name"
-                value={formData.short_name}
-                onChange={handleInputChange}
-              />
-            </label>
-            <label>
-              Customer Name:
-              <input
-                type="text"
-                name="customer_name"
-                value={formData.customer_name}
-                onChange={handleInputChange}
-              />
-            </label>
-            <label>
-            Details:<br/>(Upload Document)
-              {/* <input
+                <label>
+                  Rig Name:
+                  <input
+                    type="text"
+                    name="rig_name"
+                    value={formData.rig_name}
+                    onChange={handleInputChange}
+                  />
+                </label>
+                <label>
+                  Short Name:
+                  <input
+                    type="text"
+                    name="short_name"
+                    value={formData.short_name}
+                    onChange={handleInputChange}
+                  />
+                </label>
+                <label>
+                  Customer Name:
+                  <input
+                    type="text"
+                    name="customer_name"
+                    value={formData.customer_name}
+                    onChange={handleInputChange}
+                  />
+                </label>
+                <label>
+                  Details:<br />(Upload Document)
+                  {/* <input
                 type="text"
                 name="details"
                 value={formData.details}
                 onChange={handleInputChange}
               /> */}
-             <div className='rigaddupload' style={{ marginLeft: '30px' }}> < UploadDocument handleFileUpload={(file) => setFormData({ ...formData, details: file })} style={{paddingRight:"10px"}} /></div>
-            </label>
-            <label>
-              Design:
-              <input
-                type="text"
-                name="design"
-                value={formData.design}
-                onChange={handleInputChange}
-              />
-            </label>
-            <label>
-              Location:
-              <input
-                type="text"
-                name="location"
-                value={formData.location}
-                onChange={handleInputChange}
-              />
-            </label>
-            <label>
-              Hull Number:
-              <input
-                type="text"
-                name="hull_no"
-                value={formData.hull_no}
-                onChange={handleInputChange}
-              />
-            </label>
-            <label>
-              Design 2:
-              <input
-                type="text"
-                name="design_2"
-                value={formData.design_2}
-                onChange={handleInputChange}
-              />
-            </label>
-            <label>
-              New Group:
-              <input
-                type="text"
-                name="new_group"
-                value={formData.new_group}
-                onChange={handleInputChange}
-              />
-            </label>
-            <br />
-            <button type="submit">Submit</button>
-            <button onClick={() => setShowForm(false)}>Cancel</button>
-          </form>
+                  <div className='rigaddupload' style={{ marginLeft: '30px' }}>
+                    < input type='file' onChange={handleFileUpload} style={{ paddingRight: "10px" }} />
+                  </div>
+                </label>
+                <label>
+                  Design:
+                  <input
+                    type="text"
+                    name="design"
+                    value={formData.design}
+                    onChange={handleInputChange}
+                  />
+                </label>
+                <label>
+                  Location:
+                  <input
+                    type="text"
+                    name="location"
+                    value={formData.location}
+                    onChange={handleInputChange}
+                  />
+                </label>
+                <label>
+                  Hull Number:
+                  <input
+                    type="text"
+                    name="hull_no"
+                    value={formData.hull_no}
+                    onChange={handleInputChange}
+                  />
+                </label>
+                <label>
+                  Design 2:
+                  <input
+                    type="text"
+                    name="design_2"
+                    value={formData.design_2}
+                    onChange={handleInputChange}
+                  />
+                </label>
+                <label>
+                  New Group:
+                  <input
+                    type="text"
+                    name="new_group"
+                    value={formData.new_group}
+                    onChange={handleInputChange}
+                  />
+                </label>
+                <div className='d-flex justify-content-evenly mt-5'>
+                  <button type="submit" className='btn btn-success'>Submit</button>
+                  <button onClick={() => setShowForm(false)} className='btn btn-danger'>Cancel</button>
+                </div>
+              </form>
+            </div>
           </div>
-        </div>
-      )}
-    </div>
-    <div className='rigtablecontainer '>
-            <table  className='rigtable'>
-        <thead>
-          <tr>
-            {/* <th>Select</th> */}
-            <th>S. No</th>
-            <th>Rig Name</th>
-            <th>Short name</th>
-            <th>Customer Name</th>
-            <th>Details</th>
-            <th>Design</th>
-            <th>Location</th>
-            <th>Hull no.</th>
-            <th>Class</th>
-          </tr>
-        </thead>
-        <tbody>
-          {searchResults.map((rig, index) => (
-            <tr key={rig.id}>
-              {/* <td>
+        )}
+      </div>
+      <div className='rigtablecontainer '>
+        {
+          showListView && (
+            <div className='rigtable-table-fix-container'>
+              <table >
+                <thead>
+                  <tr>
+                    {/* <th>Select</th> */}
+                    <th>S. No</th>
+                    <th>Rig Name</th>
+                    <th>Short name</th>
+                    <th>Customer Name</th>
+                    <th>Details</th>
+                    <th>Design</th>
+                    <th>Location</th>
+                    <th>Hull no.</th>
+                    <th>Class</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {searchResults.filter((item) => {
+                    if (!searchTerm) return item;
+                    if (item.location?.toLowerCase().includes(searchTerm.toLowerCase()) || item.short_name
+                      ?.toLowerCase().includes(searchTerm.toLowerCase())) return item;
+                  }).map((rig, index) => (
+
+                    <tr key={rig.id}>
+                      {/* <td>
                 <input
                   type="radio"
                   name="rig"
@@ -344,47 +322,58 @@ const MapWithImage = ()=>{
                   onChange={() => setSelectedRigId(rig.id)}
                 />
               </td> */}
-              <td className='EditRadioBtnEnabbled'>
-                {enableEdit &&
-                <>
-                  <Editcomponent
-                      s_no={index+1}
-                      rig_name={rig.rig_name}
-                      short_name={rig.short_name}
-                      customer_name={rig.customer_name}
-                      details={rig.details}
-                      design={rig.design}
-                      location={rig.location}
-                      hull_no={rig.hull_no}
-                      design_2={rig.design_2}
-                      new_group={rig.new_group}
+                      <td className='EditRadioBtnEnabbled'>
+                        {enableEdit &&
+                          <>
+                            <Editcomponent
+                              s_no={index + 1}
+                              rig_name={rig.rig_name}
+                              short_name={rig.short_name}
+                              customer_name={rig.customer_name}
+                              details={rig.details}
+                              design={rig.design}
+                              location={rig.location}
+                              hull_no={rig.hull_no}
+                              design_2={rig.design_2}
+                              new_group={rig.new_group}
+                              handleEdit={handleEdit}
 
-                  />
-                </>
-                }
+                            />
+                          </>
+                        }
 
-                {index + 1}
-              </td>
-              <td>{rig.rig_name}</td>
-              <td>{rig.short_name}</td>
-              <td>{rig.customer_name}</td>
-              <td>
-                {/* <button onClick={() => handleDetailsClick(rig)}>
+                        {index + 1}
+                      </td>
+                      <td>{rig.rig_name}</td>
+                      <td>{rig.short_name}</td>
+                      <td>{rig.customer_name}</td>
+                      <td>
+                        {/* <button onClick={() => handleDetailsClick(rig)}>
                   View Details
                 </button> */}
-                <a class="btn" href="https://www.shelfdrilling.com/wp-content/uploads/2021/01/Shelf-Drilling_Compact-Driller_Spec-Sheet-Jan-2021.pdf" target="_newtab" title="View details">View details<img src="https://seekicon.com/free-icon-download/box-arrow-up-right_1.svg" height="15" width="49"/> </a>
-              </td>
-              <td>{rig.design}</td>
-              <td>{rig.location}</td>
-              <td>{rig.hull_no}</td>
-              <td>{rig.new_group}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+                        <a class="btn" href="https://www.shelfdrilling.com/wp-content/uploads/2021/01/Shelf-Drilling_Compact-Driller_Spec-Sheet-Jan-2021.pdf" target="_newtab" title="View details">View details<img src="https://seekicon.com/free-icon-download/box-arrow-up-right_1.svg" height="15" width="49" /> </a>
+                      </td>
+                      <td>{rig.design}</td>
+                      <td>{rig.location}</td>
+                      <td>{rig.hull_no}</td>
+                      <td>{rig.new_group}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
+        {
+          showMapView && <Showmap />
+        }
+        {
+          showHandbookView && <ShowHandbook />
+        }
+       
       </div>
-      </div>
- 
+
+    </>
+
   );
 };
 

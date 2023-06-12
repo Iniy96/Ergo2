@@ -47,22 +47,22 @@ const HorizontalLinearStepper = () => {
   const [showDosplanPreview, setShowDosplanPreview] = useState(false);
   const handlePreview = () => {
     setShowPreview(true);
-   
+
   };
 
   const handleDosplanPreview = () => {
-    
+
     setShowDosplanPreview(true);
   };
 
   const handleClosePreview = () => {
     setShowPreview(false);
-   
+
   };
 
-const handleDosplanClosePreview = () =>{
-  setShowDosplanPreview(false);
-}
+  const handleDosplanClosePreview = () => {
+    setShowDosplanPreview(false);
+  }
 
   const [projectList, setProjectList] = useState([]);
 
@@ -90,11 +90,11 @@ const handleDosplanClosePreview = () =>{
   //     pdf.save('workplan.pdf');
   //   });
   //   };
-  const [downLoadStart,setDownLoadStart] = useState(false)
-  const generatePDF1 = async() => {
+  const [downLoadStart, setDownLoadStart] = useState(false)
+  const generatePDF1 = async () => {
     await setDownLoadStart(true)
     const input = document.getElementById("workplan2");
-    const inputHeight =  await input.clientHeight;
+    const inputHeight = await input.clientHeight;
     const inputWidth = await input.clientWidth;
     html2canvas(input, { height: inputHeight, width: inputWidth }).then(
       (canvas) => {
@@ -897,7 +897,7 @@ const handleDosplanClosePreview = () =>{
                       cursor: "pointer",
                       height: "28px",
                       width: "192px",
-                     
+
                     }}
                     onClick={handlePreview}
                   >
@@ -981,7 +981,7 @@ const handleDosplanClosePreview = () =>{
                       width: "192px",
                     }}
                     onClick={handleDosplanPreview}
-                  > 
+                  >
                     Preview
                   </Typography>
                   {showDosplanPreview && (
@@ -1136,217 +1136,225 @@ const handleDosplanClosePreview = () =>{
       )}
 
 
-    {/*pdf download section*/}
+      {/*pdf download section*/}
       <div>
         {
           downLoadStart &&
           (
             <div className="workplancontainer">
-            <div
-              className="col col-lg-6 mx-auto d-flex justify-content-center"
-              style={{ marginTop: "33px" }}
-            >
-              <form id="workplan2">
-                <table className="table table-responsive table-bordered mx-auto">
-                  <thead>
-                    <tr>
-                      <th className="text-center table-light" colSpan="2">
-                        Work Plan
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <th className="table-dark" scope="row">
-                        Head
-                      </th>
-                      <td className="table-dark">Description</td>
-                    </tr>
-                    <tr>
-                      <th className="table-light" scope="row">
-                        Client
-                      </th>
-                      <td className="table-light">
-                        <input
-                          type="text"
-                          name="client"
-                          value={projectList[0]?.Customer_Name}
-                          onChange={handleChange}
-                        />
-                      </td>
-                    </tr>
-                    <tr>
-                      <th className="table-light" scope="row">
-                        Rig Name
-                      </th>
-                      <td className="table-light">
-                        <input
-                          type="text"
-                          name="rigName"
-                          value={projectList[0]?.Rig_Name}
-                          onChange={handleChange}
-                        />
-                      </td>
-                    </tr>
-                    <tr>
-                      <th className="table-light" scope="row">
-                        Sales Order No
-                      </th>
-                      <td>
-                        <input
-                          type="number"
-                          name="salesOrderNo"
-                          value={projectList[0]?.Sales_Order_NO}
-                          onChange={handleChange}
-                        />
-                      </td>
-                    </tr>
-                    <tr>
-                      <th className="table-light" scope="row">
-                        Rig Location
-                      </th>
-                      <td className="table-light">
-                        {" "}
-                        <input
-                          type="text"
-                          name="rigLocation"
-                          value={projectList[0]?.Rig_Location}
-                          onChange={handleChange}
-                        />
-                      </td>
-                    </tr>
-                    <tr>
-                      <th className="table-light" scope="row">
-                        Project Name
-                      </th>
-                      <td className="table-light">
-                        <input
-                          type="text"
-                          name="projectName"
-                          value={projectList[0]?.Service_Component}
-                          onChange={handleChange}
-                        />
-                      </td>
-                    </tr>
-                    {/* Add other table rows */}
-                    <tr>
-                      <th className="table-light" scope="row">
-                        Scope of Work
-                      </th>
-                      <td className="table-light">
-                        <input
-                          type="text"
-                          value={projectList[0]?.Service_Component}
-                        />
-                      </td>
-                    </tr>
-                    <tr>
-                      <th className="table-light" scope="row">
-                        Team Members
-                      </th>
-                      <td>
-                        <input type="text" value={projectList[0]?.Supervisor1} />
-                      </td>
-                    </tr>
-                    <tr>
-                      <th className="table-light" scope="row">
-                        Mobilisation Details
-                      </th>
-                      <td className="table-light">
-                        <input
-                          type="text"
-                          value={projectList[0]?.Estimated_Date_Of_Commencement}
-                        />
-                      </td>
-                    </tr>
-                    <tr>
-                      <th className="table-light" scope="row">
-                        Project Duration
-                      </th>
-                      <td>
-                        Estimated{" "}
-                        <input type="text" value={projectList[0]?.Po_Days} /> days
-                      </td>
-                    </tr>
-                    <tr>
-                      <th className="table-light" scope="row">
-                        Job Details
-                      </th>
-                      <td className="table-light">
-                        The scope is,
-                        <input
-                          type="text"
-                          value={projectList[0]?.Service_Component}
-                        />
-                      </td>
-                    </tr>
-                    <tr>
-                      <th className="table-light" scope="row">
-                        Final Deliverable
-                      </th>
-                      <td className="table-light">
-                        1. Daily Report &amp; Final Report 2. Status Sheet 3.
-                        Feedback form
-                      </td>
-                    </tr>
-                    <tr>
-                      <th className="table-light" scope="row">
-                        Tools &amp; Consumables
-                      </th>
-                      <td className="table-light">Available at rig</td>
-                    </tr>
-                    <tr>
-                      <th className="table-light" scope="row">
-                        Reporting
-                      </th>
-                      <td className="table-light">
-                        1. Daily Report to be sent to central team every evening
-                        2. Final report to be prepared . 3. Parts list to be made.
-                      </td>
-                    </tr>
-                    <tr>
-                      <th className="table-light" scope="row">
-                        Contact Point
-                      </th>
-                      <td className="table-light">
-                        1st Contact: Operation Team (projects@ergontec.com,
-                        +971527256908) 2nd Contact: Technical Team
-                        (operation@ergontec.com, +971521988815) 3rd Contact:
-                        Mathew (mbm@ergontec.com, +971585039099)
-                      </td>
-                    </tr>
-                    <tr>
-                      <th className="table-light" scope="row">
-                        Essential Documents Checklist
-                      </th>
-                      <td className="table-light">
-                        1. Passport 2. BOSIET 3. Medical (Health) Certificate 4.
-                        National identity Card (or Driving License) 5. Valid PCR
-                        (Covid) Test Report 6. Entry Permit for{" "}
-                        <input type="text" value={projectList[0]?.Rig_Location} />
-                      </td>
-                    </tr>
-                    <tr>
-                      <th className="table-light" scope="row">
-                        Points to Note
-                      </th>
-                      <td className="table-light">
-                        1. Please ensure that the Ergon Reporting formats are
-                        followed for the task. 2. Please ensure that all mandatory
-                        HSE documents are filled in correctly and returned after
-                        the completion of the job 3. Please ensure that daily
-                        progress reports are sent into the central team on a
-                        regular basis 4. Please ensure that all DPR’s and
-                        timesheets are signed and stamped by the client on
-                        completion of the task. 5. In case of any variation in the
-                        Scope of Work defined above, please inform the central
-                        team.
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-  
-                <div>
+              <div
+                className="col col-lg-6 mx-auto d-flex justify-content-center"
+                style={{ marginTop: "33px" }}
+              >
+                <form id="workplan2">
+                  <table className="table table-responsive table-bordered mx-auto">
+                    <thead>
+                      <tr>
+                        <th className="text-center table-light" colSpan="2">
+                          Work Plan
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th className="table-dark" scope="row">
+                          Head
+                        </th>
+                        <td className="table-dark">Description</td>
+                      </tr>
+                      <tr>
+                        <th className="table-light" scope="row">
+                          Client
+                        </th>
+                        <td className="table-light">
+                          <input
+                            type="text"
+                            name="client"
+                            value={projectList[0]?.Customer_Name}
+                            onChange={handleChange}
+                          />
+                        </td>
+                      </tr>
+                      <tr>
+                        <th className="table-light" scope="row">
+                          Rig Name
+                        </th>
+                        <td className="table-light">
+                          <input
+                            type="text"
+                            name="rigName"
+                            value={projectList[0]?.Rig_Name}
+                            onChange={handleChange}
+                          />
+                        </td>
+                      </tr>
+                      <tr>
+                        <th className="table-light" scope="row">
+                          Sales Order No
+                        </th>
+                        <td>
+                          <input
+                            type="number"
+                            name="salesOrderNo"
+                            value={projectList[0]?.Sales_Order_NO}
+                            onChange={handleChange}
+                          />
+                        </td>
+                      </tr>
+                      <tr>
+                        <th className="table-light" scope="row">
+                          Rig Location
+                        </th>
+                        <td className="table-light">
+                          {" "}
+                          <input
+                            type="text"
+                            name="rigLocation"
+                            value={projectList[0]?.Rig_Location}
+                            onChange={handleChange}
+                          />
+                        </td>
+                      </tr>
+                      <tr>
+                        <th className="table-light" scope="row">
+                          Project Name
+                        </th>
+                        <td className="table-light">
+                          <input
+                            type="text"
+                            name="projectName"
+                            value={projectList[0]?.Service_Component}
+                            onChange={handleChange}
+                          />
+                        </td>
+                      </tr>
+                      {/* Add other table rows */}
+                      <tr>
+                        <th className="table-light" scope="row">
+                          Scope of Work
+                        </th>
+                        <td className="table-light">
+                          <input
+                            type="text"
+                            value={projectList[0]?.Service_Component}
+                          />
+                        </td>
+                      </tr>
+                      <tr>
+                        <th className="table-light" scope="row">
+                          Team Members
+                        </th>
+                        <td>
+                          <input type="text" value={projectList[0]?.Supervisor1} />
+                        </td>
+                      </tr>
+                      <tr>
+                        <th className="table-light" scope="row">
+                          Mobilisation Details
+                        </th>
+                        <td className="table-light">
+                          <input
+                            type="text"
+                            value={projectList[0]?.Estimated_Date_Of_Commencement}
+                          />
+                        </td>
+                      </tr>
+                      <tr>
+                        <th className="table-light" scope="row">
+                          Project Duration
+                        </th>
+                        <td>
+                          Estimated{" "}
+                          <input type="text" value={projectList[0]?.Po_Days} /> days
+                        </td>
+                      </tr>
+                      <tr>
+                        <th className="table-light" scope="row">
+                          Job Details
+                        </th>
+                        <td className="table-light">
+                          The scope is,
+                          <input
+                            type="text"
+                            value={projectList[0]?.Service_Component}
+                          />
+                        </td>
+                      </tr>
+                      <tr>
+                        <th className="table-light" scope="row">
+                          Final Deliverable
+                        </th>
+                        <td className="table-light">
+                          1. Daily Report &amp; Final Report 2. Status Sheet 3.
+                          Feedback form
+                        </td>
+                      </tr>
+                      <tr>
+                        <th className="table-light" scope="row">
+                          Tools &amp; Consumables
+                        </th>
+                        <td className="table-light">Available at rig</td>
+                      </tr>
+                      <tr>
+                        <th className="table-light" scope="row">
+                          Reporting
+                        </th>
+                        <td className="table-light">
+                          1. Daily Report to be sent to central team every evening
+                          2. Final report to be prepared . 3. Parts list to be made.
+                        </td>
+                      </tr>
+                      <tr>
+                        <th className="table-light" scope="row">
+                          Contact Point
+                        </th>
+                        <td className="table-light">
+                          1st Contact: Operation Team (projects@ergontec.com,
+                          +971527256908) 2nd Contact: Technical Team
+                          (operation@ergontec.com, +971521988815) 3rd Contact:
+                          Mathew (mbm@ergontec.com, +971585039099)
+                        </td>
+                      </tr>
+                      <tr>
+                        <th className="table-light" scope="row">
+                          Essential Documents Checklist
+                        </th>
+                        <td className="table-light">
+                          1. Passport 2. BOSIET 3. Medical (Health) Certificate 4.
+                          National identity Card (or Driving License) 5. Valid PCR
+                          (Covid) Test Report 6. Entry Permit for{" "}
+                          <input type="text" value={projectList[0]?.Rig_Location} />
+                        </td>
+                      </tr>
+                      <tr>
+                        <th className="table-light" scope="row">
+                          Points to Note
+                        </th>
+                        <td className="table-light">
+                          1. Please ensure that the Ergon Reporting formats are
+                          followed for the task. 2. Please ensure that all mandatory
+                          HSE documents are filled in correctly and returned after
+                          the completion of the job 3. Please ensure that daily
+                          progress reports are sent into the central team on a
+                          regular basis 4. Please ensure that all DPR’s and
+                          timesheets are signed and stamped by the client on
+                          completion of the task. 5. In case of any variation in the
+                          Scope of Work defined above, please inform the central
+                          team.
+                        </td>
+                      </tr>
+                      <tr>
+                        <th className="table-light" scope="row">
+                          Hello World
+                        </th>
+                        <td className="table-light">
+                          Signed By
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+
+                  {/* <div className="bg-primary">
                   <h6
                     className="table-light"
                     style={{ marginLeft: "400px", marginTop: "10px" }}
@@ -1388,9 +1396,9 @@ const handleDosplanClosePreview = () =>{
                   >
                     6
                   </div>
-                </div>
-              </form>
-            </div>
+                </div> */}
+                </form>
+              </div>
             </div>
           )
         }
@@ -1401,7 +1409,7 @@ const handleDosplanClosePreview = () =>{
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
-
+ console.log("TabPanel",props);
   return (
     <div
       role="tabpanel"
